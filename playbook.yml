@@ -1,0 +1,40 @@
+#!/usr/bin/env ansible-playbook
+
+---
+- name: Non-Privileged Tasks
+  hosts: localhost
+  become: False
+  tasks:
+      - ansible.builtin.template:
+            src: templates/.bash_profile.j2
+            dest: "/home/vagrant/.bash_aliases"
+            backup: no
+      - ansible.builtin.copy:
+            src: files/.gitconfig
+            dest: "/home/vagrant/.gitconfig"
+            backup: no
+
+- name: Privileged Tasks
+  hosts: localhost
+  become: True
+  tasks:
+      - ansible.builtin.lineinfile:
+            dest: /etc/hosts
+            line: "{{ item }}"
+        loop:
+          - '127.0.0.1 cmdb.student.devnetops.it'
+          - '127.0.0.1 awx.student.devnetops.it'
+          - '127.0.0.1 *.student.devnetops.nl'
+
+
+- name: Tools (common)
+  hosts: localhost
+  become: True
+  tasks:
+      - ansible.builtin.package:
+            name: "{{ item }}"
+            state: latest
+        loop:
+          - tree
+          - git
+          - nano

@@ -1,0 +1,10 @@
+[user]
+	name = Student
+	email = student@devnetops.it
+[color]
+	ui = true
+[core]
+	autocrlf = input
+	editor = nano
+[push]
+	default = simple
