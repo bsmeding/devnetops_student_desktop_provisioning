@@ -67,3 +67,8 @@
       ansible.builtin.shell: ansible-galaxy collection install -r collections/requirements.yml
       args:
         chdir: "{{ repo_path  }}/student_install"        
+
+    - name: Install student tools
+      ansible.builtin.shell: ansible-playbook install_full.yml -i ./inventory
+      args:
+        chdir: "{{ repo_path  }}/student_install"             
