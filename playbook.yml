@@ -49,7 +49,7 @@
   tasks:
     - name: Create git repo
       ansible.builtin.file:
-        path: "{{ repo_path  }}"
+        path: "{{ repo_path  }}/student_install"
         state: directory
         mode: '0755'  
 
@@ -57,3 +57,13 @@
       ansible.builtin.git:
         repo: '{{ install_repo }}'
         dest: '{{ repo_path }}'       
+
+    - name: Install required roles
+      ansible.builtin.shell: ansible-galaxy role install -r roles/requirements.yml
+      args:
+        chdir: "{{ repo_path  }}/student_install"
+
+    - name: Install required collections
+      ansible.builtin.shell: ansible-galaxy collection install -r collections/requirements.yml
+      args:
+        chdir: "{{ repo_path  }}/student_install"        
