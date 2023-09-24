@@ -38,3 +38,22 @@
           - tree
           - git
           - nano
+
+
+- name: Clone repositories for DevNetOps
+  hosts: localhost
+  become: False
+  vars:
+    - repo_path: ~/git
+    - install_repo: 'https://github.com/bsmeding/network_automation_dev_setup'
+  tasks:
+    - name: Create git repo
+      ansible.builtin.file:
+        path: "{{ repo_path  }}"
+        state: directory
+        mode: '0755'  
+
+    - name: Git clone repo
+      ansible.builtin.git:
+        repo: '{{ install_repo }}'
+        dest: '{{ repo_path }}'       
