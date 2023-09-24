@@ -56,7 +56,7 @@
     - name: Git clone repo
       ansible.builtin.git:
         repo: '{{ install_repo }}'
-        dest: '{{ repo_path }}'       
+        dest: "{{ repo_path  }}/student_install"     
 
     - name: Install required roles
       ansible.builtin.shell: ansible-galaxy role install -r roles/requirements.yml
