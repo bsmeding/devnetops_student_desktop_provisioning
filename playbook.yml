@@ -24,8 +24,10 @@
         loop:
           - '127.0.0.1 cmdb.student.devnetops.it'
           - '127.0.0.1 awx.student.devnetops.it'
-          - '127.0.0.1 *.student.devnetops.nl'
-
+          - '127.0.0.1 ldap.lab.local'
+          - '127.0.0.1 awx.lab.local'
+          - '127.0.0.1 cmdb.lab.local'
+          - '127.0.0.1 git.lab.local'
 
 - name: Tools (common)
   hosts: localhost
