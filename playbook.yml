@@ -37,6 +37,7 @@
             name: "{{ item }}"
             state: latest
         loop:
+          - python3-pip
           - tree
           - git
           - nano
