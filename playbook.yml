@@ -58,12 +58,17 @@
         repo: '{{ install_repo }}'
         dest: "{{ repo_path  }}/student_install"     
 
-    - name: Install required roles
+    - name: Install required Python modules
+      ansible.builtin.shell: pip3 install -r requirements.txt
+      args:
+        chdir: "{{ repo_path  }}/student_install"
+
+    - name: Install required Ansible roles
       ansible.builtin.shell: ansible-galaxy role install -r roles/requirements.yml
       args:
         chdir: "{{ repo_path  }}/student_install"
 
-    - name: Install required collections
+    - name: Install required Ansible collections
       ansible.builtin.shell: ansible-galaxy collection install -r collections/requirements.yml
       args:
         chdir: "{{ repo_path  }}/student_install"        
